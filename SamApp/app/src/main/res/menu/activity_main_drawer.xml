@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:title="Audiovisuales">
+              <menu>
+                  <item
+                      android:id="@+id/nav_reservaciones"
+                      android:icon="@drawable/audio"
+                      android:title="Reservaciones" />
+                  <item
+                      android:id="@+id/nav_solicitar"
+                      android:icon="@android:drawable/ic_menu_edit"
+                      android:title="Solicitar" />
+               </menu>
+        </item>
+    </group>
+
+    <item android:title="Proyectores">
+        <menu>
+            <item
+                android:id="@+id/nav_proyectores"
+                android:icon="@drawable/proyicon"
+                android:title="Disponibles" />
+            <item
+                android:id="@+id/nav_admin"
+                android:icon="@android:drawable/ic_lock_lock"
+                android:title="Administrador de Laboratorio" />
+        </menu>
+    </item>
+
+</menu>
