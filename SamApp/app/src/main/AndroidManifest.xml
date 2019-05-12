@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.example.samapp">
+    package="com.example.lashope.SamAPP">
 
-    <dist:module dist:instant="true" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,16 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
+        <activity android:name="com.example.lashope.SamAPP.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+
         </activity>
+        <activity android:name="com.example.lashope.SamAPP.ConsultarProyector" />
+        <activity android:name="com.example.lashope.SamAPP.ReservarAudiovisual" />
+        <activity android:name="com.example.lashope.SamAPP.DatosSolicitante" />
+        <activity android:name="com.example.lashope.SamAPP.AdminLogin" />
+        <activity android:name="com.example.lashope.SamAPP.AdminAccount" />
+        <activity android:name="com.example.lashope.SamAPP.AltasActivity" />
+        <activity android:name="com.example.lashope.SamAPP.ReservasActivity"></activity>
     </application>
 
 </manifest>

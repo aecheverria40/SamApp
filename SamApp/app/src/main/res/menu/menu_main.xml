@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/icon_add"
+        android:icon="@drawable/add_icon"
+        android:title="Edit Done"
+        android:tint="@android:color/white"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/icon_save"
+        android:icon="@drawable/save_icon"
+        android:tint="@android:color/white"
+        android:title="Edit Done"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/icon_delete"
+        android:icon="@drawable/delete_icon"
+        android:tint="@android:color/white"
+        android:title="Edit Done"
+        app:showAsAction="always"/>
+</menu>

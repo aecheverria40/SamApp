@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/sNo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:background="@drawable/cell_shape"
+        android:text="Marca"
+        android:textSize="14sp">
+    </TextView>
+
+    <TextView
+        android:id="@+id/product"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:background="@drawable/cell_shape"
+        android:text="Modelo"
+        android:textSize="14sp">
+    </TextView>
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:ellipsize="end"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:background="@drawable/cell_shape"
+        android:text="Disponible"
+        android:textSize="14sp">
+    </TextView>
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:background="@drawable/cell_shape"
+        android:text="Maestro"
+        android:textSize="14sp">
+    </TextView>
+</LinearLayout>
