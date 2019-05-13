@@ -8,22 +8,22 @@
 
     <EditText
         android:id="@+id/edit_nom"
-        android:layout_width="0dp"
-        android:layout_height="58dp"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="Nombre(s), Apellido Paterno,  Materno"
         android:inputType="textPersonName"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/edit_corr"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.387" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView3"
@@ -64,8 +64,8 @@
 
     <EditText
         android:id="@+id/edit_tel"
-        android:layout_width="303dp"
-        android:layout_height="49dp"
+        android:layout_width="340dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -75,28 +75,27 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.685" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_corr"
+        app:layout_constraintVertical_bias="0.073" />
 
     <EditText
         android:id="@+id/edit_corr"
         android:layout_width="340dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="300dp"
         android:ems="10"
         android:hint="Correo Electrónico  @tectijuana.edu.mx"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.542" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        app:layout_constraintVertical_bias="0.617" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -111,10 +110,9 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.882">
+        app:layout_constraintVertical_bias="0.887">
 
         <Button
             android:id="@+id/btns_reservar"
