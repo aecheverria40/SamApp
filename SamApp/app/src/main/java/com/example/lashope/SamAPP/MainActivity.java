@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_reservaciones) {
             // Handle the camera action
+            //startActivity(new Intent(Reservar));
         } else if (id == R.id.nav_solicitar) {
 
             Intent i = ReservarAudiovisual.newIntent(MainActivity.this,"");
