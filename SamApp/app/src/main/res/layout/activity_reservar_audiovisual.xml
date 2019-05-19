@@ -30,21 +30,23 @@
         app:layout_constraintVertical_bias="0.015" />
 
     <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/sp1"
-        android:layout_margin="15dp"
-        android:tooltipText="@string/next_button"
-        android:layout_below="@+id/visual_text">
-    </Spinner>
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/visual_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="152dp"
+        android:tooltipText="@string/next_button"></Spinner>
 
     <Spinner
         android:id="@+id/sp2"
-        android:layout_width="wrap_content"
+        android:layout_width="114dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/sp1"
-        android:layout_marginTop="103dp">
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="123dp">
 
     </Spinner>
     <!--
@@ -59,11 +61,12 @@
 
     <Spinner
         android:id="@+id/sp4"
-        android:layout_width="wrap_content"
+        android:layout_width="114dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/sp1"
-        android:layout_marginTop="149dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="169dp"
         android:hint="Actividad">
 
     </Spinner>
@@ -92,8 +95,9 @@
         android:id="@+id/btn_fecha"
         android:layout_width="114dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/sp1"
+        android:layout_marginStart="142dp"
         android:layout_marginTop="216dp"
         android:text="Fecha" />
     <!--
