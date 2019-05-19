@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.lashope.SamAPP.R;
+import com.example.lashope.SamAPP.Models.Reserva;
 
 import java.util.UUID;
 

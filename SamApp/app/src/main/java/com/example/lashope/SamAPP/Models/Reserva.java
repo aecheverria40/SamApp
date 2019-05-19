@@ -1,4 +1,6 @@
-package com.example.lashope.SamAPP;
+package com.example.lashope.SamAPP.Models;
+
+import com.example.lashope.SamAPP.Models.Maestro;
 
 import java.io.Serializable;
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.lashope.SamAPP.R;
+import com.example.lashope.SamAPP.Models.Reserva;
 
 import java.util.ArrayList;
 

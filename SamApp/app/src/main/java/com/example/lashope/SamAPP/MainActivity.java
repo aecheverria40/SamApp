@@ -2,6 +2,9 @@ package com.example.lashope.SamAPP;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +17,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.lashope.SamAPP.Fragments.ConsultarProyectoresFragment;
+import com.example.lashope.SamAPP.Fragments.Inicio;
+import com.example.lashope.SamAPP.Fragments.ReservarAudiovisualFragment;
 import com.example.lashope.SamAPP.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -24,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //creacion de cosntantes
     private static final int REQUEST_CODE_NAME=0;
     private static final String TAG="Etiqueta";
+    //Abiel Fragmentos
+    public  static FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +39,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         // Probando Android Studio - GitHub
 
+        //Fragmentos
+        fragmentManager = getSupportFragmentManager();
 
+        if (findViewById(R.id.fragment_container) != null){
+            if (savedInstanceState != null){
+                return;
+            }
+        }
+
+        //Aqui vamos a crear las transacciones de los fragmentos
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Inicio inicioFragment = new Inicio();
+
+        fragmentTransaction.add(R.id.fragment_container, inicioFragment, null);
+        fragmentTransaction.commit();
+        //Aqui terminan los fragmentos
 
         //---------------Diseño------------------------------------------//
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -83,20 +106,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        //Para Fragmentos
+        Fragment fragment = null;
+        Class fragmentClass = null;
+
         if (id == R.id.nav_reservaciones) {
             // Handle the camera action
             //startActivity(new Intent(Reservar));
         } else if (id == R.id.nav_solicitar) {
 
-            Intent i = ReservarAudiovisual.newIntent(MainActivity.this,"");
+            //Intent i = ReservarAudiovisual.newIntent(MainActivity.this,"");
             //esperando a boton back
-            startActivityForResult(i, 0);
+            //startActivityForResult(i, 0);
+            fragmentClass = ReservarAudiovisualFragment.class;
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
         } else if (id == R.id.nav_proyectores) {
 
-            Intent i = ConsultarProyector.newIntent(MainActivity.this,"");
+            //Intent i = ConsultarProyector.newIntent(MainActivity.this,"");
             //esperando a boton back
-            startActivityForResult(i, 0);
+            //startActivityForResult(i, 0);
+            /*Fragmeto Abiel*/
+            fragmentClass = ConsultarProyectoresFragment.class;
+            try{
+                fragment = (Fragment) fragmentClass.newInstance();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+
 
         } else if (id == R.id.nav_admin) {
             startActivity(new Intent(MainActivity.this,AdminLogin.class));

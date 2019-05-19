@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.lashope.SamAPP.R;
+import com.example.lashope.SamAPP.Models.Proyector;
 
 import java.util.ArrayList;
 
