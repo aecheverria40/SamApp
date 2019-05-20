@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.lashope.SamAPP.Fragments.ConsultarProyectoresFragment;
 import com.example.lashope.SamAPP.Fragments.Inicio;
 import com.example.lashope.SamAPP.Fragments.ReservarAudiovisualFragment;
+import com.example.lashope.SamAPP.Fragments.ReservasAudiovisualFragment;
 import com.example.lashope.SamAPP.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -113,6 +114,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_reservaciones) {
             // Handle the camera action
             //startActivity(new Intent(Reservar));
+            fragmentClass= ReservasAudiovisualFragment.class;
+            try{
+                fragment= (Fragment) fragmentClass.newInstance();
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+            FragmentManager fragmentManager=getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,fragment).commit();
         } else if (id == R.id.nav_solicitar) {
 
             //Intent i = ReservarAudiovisual.newIntent(MainActivity.this,"");
