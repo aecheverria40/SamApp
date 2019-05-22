@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.ReservasAudiovisualFragment">
 
     <LinearLayout
-        android:layout_width = "fill_parent"
-        android:layout_height = "wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="Reservaciones de audiovisuales"
             android:textColorLink="@android:color/background_dark"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:text="Reservaciones de audiovisuales"/>
+            android:textStyle="bold" />
+
         <LinearLayout
             android:id="@+id/relativeLayout1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/verdeForest" >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/verdeForest">
 
             <TextView
-                android:layout_width="23dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="2dp"
@@ -38,29 +43,27 @@
             </TextView>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
 
                 android:padding="2dp"
                 android:text="Fecha"
-                android:textSize="16sp"
-                android:textColor="#ffffff" >
-            </TextView>
+                android:textColor="#ffffff"
+                android:textSize="16sp"></TextView>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
 
                 android:padding="2dp"
                 android:text="Hora"
-                android:textSize="16sp"
-                android:textColor="#ffffff" >
-            </TextView>
+                android:textColor="#ffffff"
+                android:textSize="16sp"></TextView>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
 
@@ -73,9 +76,61 @@
         <ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null" >
-        </ListView>
+            android:layout_height="260dp"
+            android:divider="@null"></ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/picker_desde"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="date"
+                    android:hint="Desde"/>
+
+                <EditText
+                    android:id="@+id/picker_hasta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="date"
+                    android:hint="Hasta"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_query"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Consultar" />
+
+                <Button
+                    android:id="@+id/btn_deletequery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Borrar Consulta" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

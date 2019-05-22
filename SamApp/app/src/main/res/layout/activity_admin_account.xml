@@ -1,70 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.lashope.SamAPP.AdminAccount">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/linearLayout2"
+        android:layout_width="354dp"
+        android:layout_height="482dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        android:padding="12dp">
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <EditText
             android:id="@+id/txt_marca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Marca"/>
+            android:hint="Marca"
+            android:inputType="textPersonName" />
+
         <EditText
             android:id="@+id/txt_modelo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Modelo"/>
+            android:hint="Modelo"
+            android:inputType="textPersonName" />
+
         <EditText
             android:id="@+id/txt_disponible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Disponibilidad"/>
+            android:hint="Disponibilidad"
+            android:inputType="textPersonName" />
+
         <EditText
             android:id="@+id/txt_maestro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Maestro"/>
+            android:hint="Maestro"
+            android:inputType="textPersonName" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <Button
                 android:id="@+id/btn_upload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Subir"/>
+                android:text="Subir" />
+
             <TextView
                 android:id="@+id/txt_upload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Subir archivo..."/>
+                android:text="Subir archivo..." />
         </LinearLayout>
+
         <TextView
-            android:text="Lista de Proyectores"
-            android:textSize="28dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Lista de Proyectores"
+            android:textSize="28dp" />
+
         <ListView
             android:id="@+id/lv_datosProyectores"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content">
 
+        </ListView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/nav_barAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:menu="@menu/admin_menu" />
+        </FrameLayout>
     </LinearLayout>
+
+
+
+
+
+
     <!--
 
     <Button
@@ -86,18 +123,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.654" />
         -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/bottonBarAdmin"
-        android:layout_alignParentBottom="true">
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/nav_barAdmin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            app:menu="@menu/admin_menu" />
-    </RelativeLayout>
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
