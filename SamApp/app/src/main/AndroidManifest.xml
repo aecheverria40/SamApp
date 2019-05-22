@@ -14,23 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.lashope.SamAPP.MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name="com.example.lashope.SamAPP.ConsultarProyector" />
-        <activity android:name="com.example.lashope.SamAPP.ReservarAudiovisual" />
-        <activity android:name="com.example.lashope.SamAPP.DatosSolicitante" />
-        <activity android:name="com.example.lashope.SamAPP.AdminLogin" />
-        <activity android:name="com.example.lashope.SamAPP.AdminAccount" />
-        <activity android:name="com.example.lashope.SamAPP.AltasActivity" />
-        <activity android:name="com.example.lashope.SamAPP.ReservasActivity"></activity>
+        <activity android:name=".ConsultarProyector" />
+        <activity android:name=".ReservarAudiovisual" />
+        <activity android:name=".DatosSolicitante" />
+        <activity android:name=".AdminLogin" />
+        <activity android:name=".AdminAccount" />
+        <activity android:name=".AltasActivity" />
+        <activity android:name=".ReservasActivity" />
     </application>
 
 </manifest>

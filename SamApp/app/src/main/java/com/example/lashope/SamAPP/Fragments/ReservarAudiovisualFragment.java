@@ -1,20 +1,22 @@
-package com.example.lashope.SamAPP;
+package com.example.lashope.SamAPP.Fragments;
+
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -23,8 +25,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lashope.SamAPP.DatosSolicitante;
 import com.example.lashope.SamAPP.Models.Maestro;
 import com.example.lashope.SamAPP.Models.Reserva;
+import com.example.lashope.SamAPP.R;
+import com.example.lashope.SamAPP.ReservarAudiovisual;
+import com.example.lashope.SamAPP.ReservasActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,9 +43,12 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class ReservarAudiovisualFragment extends Fragment {
 
-public class ReservarAudiovisual extends AppCompatActivity {
-
+    //<editor-fold desc="Variables">
     //Variable miembro
     //Declaracion de constante
     private static final String SEND_MESSAGE="message";
@@ -103,42 +112,36 @@ public class ReservarAudiovisual extends AppCompatActivity {
     private Button btn_fecha,btn_hora,btn_fhora;
     private EditText edit_fecha,edit_hora,edit_fhora,edit_comm;
     private Button mSolicitar,mReservas;
+    //</editor-fold>
 
-    public static Intent newIntent(Context packageContext, String message){
-        Intent i= new Intent(packageContext,ReservarAudiovisual.class);
-        i.putExtra(SEND_MESSAGE,message);
-        return i;
-    }
 
-    public static String wasNameShown(Intent result){
-        return result.getStringExtra(EXTRA_NAME_SHOWN);
+    public ReservarAudiovisualFragment() {
+        // Required empty public constructor
     }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reservar_audiovisual);
-        //quitar ActionBar
-        getSupportActionBar().hide();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View views = inflater.inflate(R.layout.fragment_reservar_audiovisual, container, false);
 
+        //Inicializar firebase
         initializeFirebase();
         listData("names");
 
-        mSalas = (Spinner)findViewById(R.id.sp1);
-        mHi = (Spinner)findViewById(R.id.sp2);
+        mSalas = (Spinner)views.findViewById(R.id.sp1);
+        mHi = (Spinner)views.findViewById(R.id.sp2);
         // mHf = (Spinner)findViewById(R.id.sp3);
-        mActividad = (Spinner)findViewById(R.id.sp4);
-        mSolicitar = (Button)findViewById(R.id.solicitar_button);
-
-
+        mActividad = (Spinner)views.findViewById(R.id.sp4);
+        mSolicitar = (Button)views.findViewById(R.id.solicitar_button);
 
         // ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.salas,android.R.layout.simple_spinner_item);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,salas);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,salas);
         mSalas.setAdapter(adapter);
 
         // ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.hi,android.R.layout.simple_spinner_item);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, hi);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, hi);
         mHi.setAdapter(adapter2);
 
         // ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,R.array.hf,android.R.layout.simple_spinner_item);
@@ -146,17 +149,17 @@ public class ReservarAudiovisual extends AppCompatActivity {
         // mHf.setAdapter(adapter3);
 
         // ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,R.array.actividad,android.R.layout.simple_spinner_item);
-        ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,actividad);
+        ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,actividad);
         mActividad.setAdapter(adapter4);
 
-        btn_fecha = (Button)findViewById(R.id.btn_fecha);
-        mReservas = (Button)findViewById(R.id.reservas_button);
+        btn_fecha = (Button)views.findViewById(R.id.btn_fecha);
+        mReservas = (Button)views.findViewById(R.id.reservas_button);
         // btn_fhora = (Button)findViewById(R.id.btn_horaF);
         // btn_hora = (Button)findViewById(R.id.btn_hora);
-        edit_fecha = (EditText) findViewById(R.id.text_fecha);
+        edit_fecha = (EditText) views.findViewById(R.id.text_fecha);
         // edit_hora = (EditText) findViewById(R.id.text_hora);
         // edit_fhora = (EditText) findViewById(R.id.text_horaF);
-        edit_comm = (EditText) findViewById(R.id.edit_comm);
+        edit_comm = (EditText) views.findViewById(R.id.edit_comm);
 
         btn_fecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +168,7 @@ public class ReservarAudiovisual extends AppCompatActivity {
                 dia = calendar.get(Calendar.DAY_OF_MONTH);
                 mes = calendar.get(Calendar.MONTH);
                 ano = calendar.get(Calendar.YEAR);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(ReservarAudiovisual.this, new DatePickerDialog.OnDateSetListener(){
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         edit_fecha.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+ year);
@@ -175,11 +178,10 @@ public class ReservarAudiovisual extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
         mReservas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReservarAudiovisual.this,ReservasActivity.class));
+                startActivity(new Intent(getContext(), ReservasActivity.class));
             }
         });
 
@@ -198,36 +200,16 @@ public class ReservarAudiovisual extends AppCompatActivity {
 
                 }
                 else {
-                    // databaseReference.child("Reserva").orderByKey();
-                    // databaseReference.getRoot().orderByKey();
-                    // Toast.makeText(ReservarAudiovisual.this,listReserva.get(0).getAudiovisual(),Toast.LENGTH_SHORT).show();
-                    // Toast.makeText(ReservarAudiovisual.this,mActividad.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
-
-
                     for(int i = 0; i < cont; i++)
                     {
                         // Toast.makeText(ReservarAudiovisual.this,listReserva.get(i).toString(),Toast.LENGTH_SHORT).show();
                         if(listReserva.get(i).getHora().equals(mHi.getSelectedItem().toString()) && listReserva.get(i).getFecha().equals(f)
                                 && listReserva.get(i).getAudiovisual().equals(mSalas.getSelectedItem().toString()))
                         {
-                            Toast.makeText(ReservarAudiovisual.this,"ESTA FECHA Y HORA NO ESTÁ DISPONIBLE",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"ESTA FECHA Y HORA NO ESTÁ DISPONIBLE",Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
-                    // Toast.makeText(ReservarAudiovisual.this,"DISPONIBLE",Toast.LENGTH_SHORT).show();
-                    // return;
-
-
-                    /*
-                    for (int i = 0; i < reservas.length; i++) {
-                        Reserva fruit = reservas[i];
-                        if(fruit.getHora().toString() == mHi.getSelectedItem().toString()) {
-                            Toast.makeText(ReservarAudiovisual.this,"NO Disponible",Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-                    */
-
 
                     p = new Reserva();
                     p.setUid(UUID.randomUUID().toString());
@@ -239,69 +221,34 @@ public class ReservarAudiovisual extends AppCompatActivity {
                     p.setTema(mActividad.getSelectedItem().toString());
                     p.setMaestro(null);
 
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ReservarAudiovisual.this);
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(getContext());
                     dlgAlert.setMessage("Sala: " + p.getAudiovisual() + "\n" +
-                                        "Hora: " + p.getHora() + "\n" +
-                                        "Fecha: " + p.getFecha());
+                            "Hora: " + p.getHora() + "\n" +
+                            "Fecha: " + p.getFecha());
                     dlgAlert.setTitle("Confirmación");
                     dlgAlert.setPositiveButton("Aceptar",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             //dismiss the dialog
                             Reserva message = p;
-                            Intent i = DatosSolicitante.newIntent(ReservarAudiovisual.this, message);
+                            Intent i = DatosSolicitante.newIntent(getContext(), message);
                             startActivityForResult(i, 0);
                         }
                     });
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();
-
-                    /*
-
-                    Reserva message = p;
-                    Intent i = DatosSolicitante.newIntent(ReservarAudiovisual.this, message);
-                    startActivityForResult(i, 0);
-
-                    */
-
-
-
-
-                    // Intent i = DatosSolicitante.newIntent(ReservarAudiovisual.this,message);
-                    // Intent i = new Intent(MainActivity.this, otherActivity.class);
-                    // startActivityForResult(i,0);
                 }
             }
         });
 
 
-        // Navigation Bar
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.nav_bar);
-        menu = bottomNavigationView.getMenu();
-        menuItem = menu.getItem(0);
-        menuItem.setChecked(true);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.audio:
-                        break;
-                    case R.id.proyector:
-                        Intent b = new Intent(ReservarAudiovisual.this,ConsultarProyector.class);
-                        startActivity(b);
-                        finish();
-                        break;
-                    case R.id.otros:
-                        finish();
-                        break;
-                }
-                return false;
-            }
-        });
+
+        return views;
     }
+
     @Override
-    protected void onActivityResult(int requestCode,int resultCode,Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(resultCode != Activity.RESULT_OK) {
-            Toast.makeText(getApplicationContext(),"Reservación Cancelada",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),"Reservación Cancelada",Toast.LENGTH_LONG).show();
             return;
         }
         if(requestCode == REQUEST_CODE_NAME){
@@ -321,37 +268,22 @@ public class ReservarAudiovisual extends AppCompatActivity {
                 p.setMaestro(m);
             }
             catch (Exception e) {
-                Toast.makeText(getApplicationContext(),"Datos del solicitante inválidos\nIntentelo de nuevo",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Datos del solicitante inválidos\nIntentelo de nuevo",Toast.LENGTH_LONG).show();
                 return;
             }
             // Toast.makeText(ReservarAudiovisual.this, m.toString(), Toast.LENGTH_SHORT).show();
 
             databaseReference.child("Reserva").child(p.getUid()).setValue(p);
-            Toast.makeText(ReservarAudiovisual.this, "Reservación Realizada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Reservación Realizada", Toast.LENGTH_SHORT).show();
         }
         Log.d(TAG,"onActivityResult() llamado");
     }
 
     private void initializeFirebase(){
-        FirebaseApp.initializeApp(this);
+        FirebaseApp.initializeApp(getContext());
         firebaseDatabase = FirebaseDatabase.getInstance();
         // firebaseDatabase.setPersistenceEnabled(true);
         databaseReference = firebaseDatabase.getReference();
-    }
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-        Log.d(TAG,"onStart() llamado");
-        cont = 0;
-
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Log.d(TAG,"onResume() llamado");
-
     }
 
     private void listData(final String selected){
@@ -378,6 +310,7 @@ public class ReservarAudiovisual extends AppCompatActivity {
                     }
                 });
     }
+
     private void validation(){
         String nombre = mSalas.getSelectedItem().toString();
         String apellido = mHi.getSelectedItem().toString();
@@ -405,4 +338,5 @@ public class ReservarAudiovisual extends AppCompatActivity {
             // edPas.setError("Requerido");
         }
     }
+
 }

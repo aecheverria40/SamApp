@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.lashope.SamAPP.R;
+import com.example.lashope.SamAPP.Models.Proyector;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -68,9 +68,9 @@ public class ConsultarProyector extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
     }
     //Metodo que se manda llamar desde la MainACTIVITY PARA OBTENER EL VALOR DE LA VARIABLE NAME Que se arguardp en la ocnstante
-    public static String wasNameShown(Intent result){
+    /*public static String wasNameShown(Intent result){
         return result.getStringExtra(EXTRA_NAME_SHOWN);
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,76 +201,76 @@ public class ConsultarProyector extends AppCompatActivity {
 
 
     }
-    public void actualizar() {
-        // productList = new ArrayList<Proyector>();
-
-        lview = (ListView) findViewById(R.id.listview);
-        adapter = new listviewAdapter(this, productList);
-        lview.setAdapter(adapter);
-
-        adapter.notifyDataSetChanged();
-
-        lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("TAG","ES 1");
-                Proyector temp = null;
-
-                sno = ((TextView)view.findViewById(R.id.sNo)).getText().toString();
-                product = ((TextView)view.findViewById(R.id.product)).getText().toString();
-                category = ((TextView)view.findViewById(R.id.category)).getText().toString();
-                price = ((TextView)view.findViewById(R.id.price)).getText().toString();
-                /*
-                Toast.makeText(getApplicationContext(),sno + "\n"
-                        + product + "\n"
-                        + category + "\n"
-                        + price,Toast.LENGTH_SHORT).show();
-                */
-                Log.d("TAG","ES 2");
-                for(int i=0; i < productList.size();i++){
-                    if (productList.get(i).getMarca() == sno) {
-                        temp = (Proyector)productList.get(i);
-                        u = temp.getId();
-                    }
-                }
-                //---IMAGEN
-                StorageReference filepath = mStorage
-                        .child("images")
-                        .child("Proyectores")
-                        .child(temp.getId())
-                        //.child("2eed46a8-31af-41d7-872d-cd69df0a5549")
-                        .child(temp.getProyector());
-                selected_url = temp.getProyector();
-
-                filepath.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-
-                        downloadUrl = task.getResult();
-                        // downloadurl will be the resulted answer
-                    }
-                });
-                // IMAGEN
-                Log.d("TAG","ES 3");
-                if (temp != null) {
-                    img = (ImageView)findViewById(R.id.img_view);
-                    // img.setImageResource(temp.getProyector());
-                    // Toast.makeText(AltasActivity.this,"IMAGENA",Toast.LENGTH_SHORT).show();
-                    Glide.with(ConsultarProyector.this).load(downloadUrl)
-                            .fitCenter()
-                            .centerCrop()
-                            .into(img);
-                }
-                Log.d("TAG","ES 4");
-                Toast.makeText(getApplicationContext(), "Marca : " + sno +"\n"
-                        +"Modelo : " + product +"\n"
-                        +"Disponible : " +category +"\n"
-                        +"Maestro : " +price, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
+//    public void actualizar() {
+//        // productList = new ArrayList<Proyector>();
+//
+//        lview = (ListView) findViewById(R.id.listview);
+//        adapter = new listviewAdapter(this, productList);
+//        lview.setAdapter(adapter);
+//
+//        adapter.notifyDataSetChanged();
+//
+//        lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Log.d("TAG","ES 1");
+//                Proyector temp = null;
+//
+//                sno = ((TextView)view.findViewById(R.id.sNo)).getText().toString();
+//                product = ((TextView)view.findViewById(R.id.product)).getText().toString();
+//                category = ((TextView)view.findViewById(R.id.category)).getText().toString();
+//                price = ((TextView)view.findViewById(R.id.price)).getText().toString();
+//                /*
+//                Toast.makeText(getApplicationContext(),sno + "\n"
+//                        + product + "\n"
+//                        + category + "\n"
+//                        + price,Toast.LENGTH_SHORT).show();
+//                */
+//                Log.d("TAG","ES 2");
+//                for(int i=0; i < productList.size();i++){
+//                    if (productList.get(i).getMarca() == sno) {
+//                        temp = (Proyector)productList.get(i);
+//                        u = temp.getId();
+//                    }
+//                }
+//                //---IMAGEN
+//                StorageReference filepath = mStorage
+//                        .child("images")
+//                        .child("Proyectores")
+//                        .child(temp.getId())
+//                        //.child("2eed46a8-31af-41d7-872d-cd69df0a5549")
+//                        .child(temp.getProyector());
+//                selected_url = temp.getProyector();
+//
+//                filepath.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Uri> task) {
+//
+//                        downloadUrl = task.getResult();
+//                        // downloadurl will be the resulted answer
+//                    }
+//                });
+//                // IMAGEN
+//                Log.d("TAG","ES 3");
+//                if (temp != null) {
+//                    img = (ImageView)findViewById(R.id.img_view);
+//                    // img.setImageResource(temp.getProyector());
+//                    // Toast.makeText(AltasActivity.this,"IMAGENA",Toast.LENGTH_SHORT).show();
+//                    Glide.with(ConsultarProyector.this).load(downloadUrl)
+//                            .fitCenter()
+//                            .centerCrop()
+//                            .into(img);
+//                }
+//                Log.d("TAG","ES 4");
+//                Toast.makeText(getApplicationContext(), "Marca : " + sno +"\n"
+//                        +"Modelo : " + product +"\n"
+//                        +"Disponible : " +category +"\n"
+//                        +"Maestro : " +price, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//    }
     private void populateList() {
 
         databaseReference.child("Proyector").

@@ -1,4 +1,4 @@
-package com.example.lashope.SamAPP;
+package com.example.lashope.SamAPP.Models;
 
 public class Maestro {
     private String Uid;
