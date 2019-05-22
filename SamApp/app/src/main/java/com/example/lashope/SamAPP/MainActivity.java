@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Class fragmentClass = null;
 
         if (id == R.id.nav_reservaciones) {
-<<<<<<< HEAD
+
             // Handle the camera action
             //startActivity(new Intent(Reservar));
             fragmentClass= ReservasAudiovisualFragment.class;
@@ -125,9 +125,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             FragmentManager fragmentManager=getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment_container,fragment).commit();
-=======
-            startActivity(new Intent(MainActivity.this,ReservasActivity.class));
->>>>>>> master
+
+//            startActivity(new Intent(MainActivity.this,ReservasActivity.class));
+
         } else if (id == R.id.nav_solicitar) {
 
             //Intent i = ReservarAudiovisual.newIntent(MainActivity.this,"");
