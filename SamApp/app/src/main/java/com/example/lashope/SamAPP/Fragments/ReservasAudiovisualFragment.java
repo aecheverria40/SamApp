@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.Query;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -41,6 +43,9 @@ import java.util.Date;
     DatabaseReference databaseReference;
     public listviewAdapterReserva adapter;
     Date fecha_actual = null;
+
+    SimpleDateFormat fecha_hasta = new SimpleDateFormat("dd/MM/yyyy");
+    Date getFecha;
     Date fecha_obj= null;
     DateFormat formatter = null;
     Button btn_query ,btn_deletequery;
@@ -68,10 +73,14 @@ import java.util.Date;
         // Inflate the layout for this fragment
         final View view= inflater.inflate(R.layout.fragment_reservas_audiovisual, container, false);
         initializeFirebase();
-
+        final SimpleDateFormat fecha_desde = new SimpleDateFormat("dd/MM/yyyy");
+        btn_query=view.findViewById(R.id.btn_query);
+        btn_deletequery=view.findViewById(R.id.btn_deletequery);
         picker_desde=view.findViewById(R.id.picker_desde);
+        picker_desde.setKeyListener(null);
         picker_hasta=view.findViewById(R.id.picker_hasta);
-
+        picker_hasta.setKeyListener(null);
+        final String fecha = "12/10/2019";
         formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date today = new Date();
         try {
@@ -89,6 +98,7 @@ import java.util.Date;
         picker_desde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final Calendar calendar = Calendar.getInstance();
                 dia=calendar.get(Calendar.DAY_OF_MONTH);
                 mes=calendar.get(Calendar.MONTH);
@@ -101,12 +111,18 @@ import java.util.Date;
                 }
                         ,ano ,mes , dia);
                 datePickerDialog.show();
+
+                picker_hasta.requestFocus();
             }
         });
+
+        getFecha = new Date();
+        getFecha = fecha_desde.parse("12/10/2019");
 
         picker_hasta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final Calendar calendar = Calendar.getInstance();
                 dia=calendar.get(Calendar.DAY_OF_MONTH);
                 mes=calendar.get(Calendar.MONTH);
@@ -122,13 +138,19 @@ import java.util.Date;
             }
         });
 
+        btn_query.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return view;
     }
 
     private void initializeFirebase(){
         FirebaseApp.initializeApp(getContext());
         firebaseDatabase = FirebaseDatabase.getInstance();
-        // firebaseDatabase.setPersistenceEnabled(true);
         databaseReference = firebaseDatabase.getReference();
     }
 
@@ -161,6 +183,36 @@ import java.util.Date;
 
                 });
 
+    }
+
+    //Metodo para consultar de fecha tal hasta fecha tal
+    private void populateListQuery(){
+        databaseReference.child("Reserva").
+                addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        // listPerson.clear();
+                        productList.clear();
+                        for(DataSnapshot objSnapShot :
+                                dataSnapshot.getChildren()){
+                            Reserva r = objSnapShot.getValue(Reserva.class);
+                            try {
+                                fecha_obj = (Date) formatter.parse(r.getFecha());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            if (fecha_actual.compareTo(fecha_obj) == 0) {
+                                productList.add(r);
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+
+                });
     }
 
 }
