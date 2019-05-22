@@ -92,32 +92,31 @@ public class ReservasActivity extends AppCompatActivity {
     }
     private void populateList() {
 
-        databaseReference.child("Reserva").
-                addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        // listPerson.clear();
-                        productList.clear();
-                        for(DataSnapshot objSnapShot :
-                                dataSnapshot.getChildren()){
-                            Reserva r = objSnapShot.getValue(Reserva.class);
-                            try {
-                                fecha_obj = (Date) formatter.parse(r.getFecha());
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-                            if (fecha_actual.compareTo(fecha_obj) == 0) {
-                                productList.add(r);
-                            }
-                        }
-                        adapter.notifyDataSetChanged();
+        databaseReference.child("Reserva").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                productList.clear();
+                for(DataSnapshot objSnapShot :
+                        dataSnapshot.getChildren()){
+                    Reserva r = objSnapShot.getValue(Reserva.class);
+                    try {
+                        fecha_obj = (Date) formatter.parse(r.getFecha());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    if (fecha_actual.compareTo(fecha_obj) == 0) {
+                        productList.add(r);
                     }
+                }
+                adapter.notifyDataSetChanged();
+            }
 
-                });
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
 }
