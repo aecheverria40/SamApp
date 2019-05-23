@@ -121,6 +121,13 @@ import java.util.Date;
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         picker_desde.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+ year);
+                        //Parseo y guardo la fecha
+                        try {
+                            fecha_des = parseDate.parse(picker_desde.getText().toString());
+                        }
+                        catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 }
                         ,ano ,mes , dia);
@@ -130,13 +137,7 @@ import java.util.Date;
             }
         });
 
-        //Parseo y guardo la fecha
-        try {
-            fecha_des = parseDate.parse(picker_desde.getText().toString());
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+
 
         //Desplegar el calendario cuando es picado el EditText
         picker_hasta.setOnClickListener(new View.OnClickListener() {
@@ -147,22 +148,24 @@ import java.util.Date;
                 dia=calendar.get(Calendar.DAY_OF_MONTH);
                 mes=calendar.get(Calendar.MONTH);
                 ano=calendar.get(Calendar.YEAR);
+
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         picker_hasta.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+ year);
+                        //Parseo de la fecha
+                        try {
+                            fecha_hasta = parseDate.parse(picker_hasta.getText().toString());
+                        }
+                        catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 }
                         ,ano ,mes , dia);
+
                 datePickerDialog.show();
 
-                //Parseo de la fecha
-                try {
-                    fecha_hasta = parseDate.parse(picker_hasta.getText().toString());
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
             }
         });
 
@@ -173,6 +176,12 @@ import java.util.Date;
             }
         });
 
+        btn_deletequery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                populateList();
+            }
+        });
         return view;
     }
 

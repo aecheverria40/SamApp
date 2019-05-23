@@ -119,14 +119,14 @@
                 <Button
                     android:id="@+id/btn_query"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Consultar" />
 
                 <Button
                     android:id="@+id/btn_deletequery"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Borrar Consulta" />
             </LinearLayout>
