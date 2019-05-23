@@ -42,10 +42,11 @@ import java.util.Date;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     public listviewAdapterReserva adapter;
-    Date fecha_actual = null;
+    Date fecha_actual = null, fecha_des = null, fecha_hasta = null;
 
-    SimpleDateFormat fecha_hasta = new SimpleDateFormat("dd/MM/yyyy");
-    Date getFecha;
+    //Para formatear la fecha
+    SimpleDateFormat parseDate = new SimpleDateFormat("dd/MM/yyyy");
+
     Date fecha_obj= null;
     DateFormat formatter = null;
     Button btn_query ,btn_deletequery;
@@ -72,15 +73,21 @@ import java.util.Date;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view= inflater.inflate(R.layout.fragment_reservas_audiovisual, container, false);
+
+        //Inicialzo los objetos Date y Firebase
+        fecha_des = new Date();
+        fecha_hasta = new Date();
         initializeFirebase();
-        final SimpleDateFormat fecha_desde = new SimpleDateFormat("dd/MM/yyyy");
+
+        //Inflo los componentes
         btn_query=view.findViewById(R.id.btn_query);
         btn_deletequery=view.findViewById(R.id.btn_deletequery);
         picker_desde=view.findViewById(R.id.picker_desde);
         picker_desde.setKeyListener(null);
         picker_hasta=view.findViewById(R.id.picker_hasta);
         picker_hasta.setKeyListener(null);
-        final String fecha = "12/10/2019";
+
+        //Este a estaba
         formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date today = new Date();
         try {
@@ -88,13 +95,20 @@ import java.util.Date;
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        //Aqui se guardaran los resultados obtenidos
         productList = new ArrayList<Reserva>();
+
+        //Inflo el listview donde se desplegaran los registros
         lview = (ListView) view.findViewById(R.id.listview);
+
         adapter = new listviewAdapterReserva( productList,getActivity());
         lview.setAdapter(adapter);
         populateList();
+
         adapter.notifyDataSetChanged();
 
+        //Desplegar el calendario cuando es picado el EditText
         picker_desde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,9 +130,15 @@ import java.util.Date;
             }
         });
 
-        getFecha = new Date();
-        getFecha = fecha_desde.parse("12/10/2019");
+        //Parseo y guardo la fecha
+        try {
+            fecha_des = parseDate.parse(picker_desde.getText().toString());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 
+        //Desplegar el calendario cuando es picado el EditText
         picker_hasta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,25 +155,35 @@ import java.util.Date;
                 }
                         ,ano ,mes , dia);
                 datePickerDialog.show();
+
+                //Parseo de la fecha
+                try {
+                    fecha_hasta = parseDate.parse(picker_hasta.getText().toString());
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 
         btn_query.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                populateListQuery(fecha_des, fecha_hasta);
             }
         });
 
         return view;
     }
 
+    //Inicializador de Firebase
     private void initializeFirebase(){
         FirebaseApp.initializeApp(getContext());
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
 
+    //Se guardan los registros en la lista
     private void populateList() {
 
         databaseReference.child("Reserva").
@@ -182,11 +212,10 @@ import java.util.Date;
                     }
 
                 });
-
     }
 
     //Metodo para consultar de fecha tal hasta fecha tal
-    private void populateListQuery(){
+    private void populateListQuery(final Date fecha_des_value, final Date fecha_hasta_value){
         databaseReference.child("Reserva").
                 addValueEventListener(new ValueEventListener() {
                     @Override
@@ -201,7 +230,7 @@ import java.util.Date;
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
-                            if (fecha_actual.compareTo(fecha_obj) == 0) {
+                            if (fecha_obj.after(fecha_des_value) && fecha_obj.before(fecha_hasta_value)) {
                                 productList.add(r);
                             }
                         }
