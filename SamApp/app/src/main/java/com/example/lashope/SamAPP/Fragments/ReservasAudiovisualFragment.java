@@ -241,6 +241,8 @@ import java.util.Date;
                             }
                             if (fecha_obj.after(fecha_des_value) && fecha_obj.before(fecha_hasta_value)) {
                                 productList.add(r);
+                            }else if(fecha_obj.equals(fecha_des_value) || fecha_obj.equals(fecha_hasta_value)){
+                                productList.add(r);
                             }
                         }
                         adapter.notifyDataSetChanged();
