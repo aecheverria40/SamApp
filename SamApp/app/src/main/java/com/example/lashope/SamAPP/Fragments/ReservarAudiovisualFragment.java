@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -32,6 +33,7 @@ import com.example.lashope.SamAPP.R;
 import com.example.lashope.SamAPP.ReservarAudiovisual;
 import com.example.lashope.SamAPP.ReservasActivity;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -114,6 +116,8 @@ public class ReservarAudiovisualFragment extends Fragment {
     private Button mSolicitar,mReservas;
     //</editor-fold>
 
+    //Tratare de hacer una lista, si se encuentra entonces
+    ArrayList<Reserva> horas = new ArrayList<>();
 
     public ReservarAudiovisualFragment() {
         // Required empty public constructor
@@ -200,6 +204,7 @@ public class ReservarAudiovisualFragment extends Fragment {
 
                 }
                 else {
+
                     for(int i = 0; i < cont; i++)
                     {
                         // Toast.makeText(ReservarAudiovisual.this,listReserva.get(i).toString(),Toast.LENGTH_SHORT).show();
@@ -240,7 +245,7 @@ public class ReservarAudiovisualFragment extends Fragment {
             }
         });
 
-
+        getHoras();
 
         return views;
     }
@@ -309,6 +314,40 @@ public class ReservarAudiovisualFragment extends Fragment {
 
                     }
                 });
+    }
+
+    /*Borrar si no funciona*/
+    private void getHoras(){
+        //Referencia como
+        databaseReference.child("Reserva").orderByChild("fecha").equalTo("19/5/2019").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                for (DataSnapshot objectSnapshot:dataSnapshot.getChildren()){
+                    Reserva p = objectSnapshot.getValue(Reserva.class);
+                    //horas.add(p);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void validation(){
